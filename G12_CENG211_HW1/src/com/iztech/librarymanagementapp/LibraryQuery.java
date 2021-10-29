@@ -72,7 +72,7 @@ public class LibraryQuery {
 			maxName = library03Values[1];
 		}
 
-		System.out.println(maxName);
+		System.out.println("1) " + maxName);
 	}
 
 	public void getMemberMostIssue() {
@@ -104,7 +104,7 @@ public class LibraryQuery {
 				}
 			}
 		}
-		System.out.println(maxMember);
+		System.out.println("2) " + maxMember);
 	}
 
 	public void getHighPenalty() {
@@ -168,63 +168,108 @@ public class LibraryQuery {
 		}
 		maxDayFee = total - 14.0;
 		maxDayFee *= 0.5;
-		System.out.println(maxDayFee);
+		System.out.println("3) " + maxDayFee);
 
 	}
 
 	public void getMostCopy() {
-		
+
 		Library library = null;
 		Book[] books = null;
-		String[] libraries = {library01Books,library02Books,library03Books};
+		String[] libraries = { library01Books, library02Books, library03Books };
 		int max = 0;
 		String maxName = null;
-		
-		for(int i=0; i<libraries.length ; i++) {
-			
+
+		for (int i = 0; i < libraries.length; i++) {
+
 			library = FileIO.getBooks(libraries[i]);
 			books = library.getBook();
 
-			for(Book book : books) {
-				
-				if(book != null) {
-					
-					if(max < book.getQuantity()) {
-					max = book.getQuantity();
-					maxName = book.getTitle();
+			for (Book book : books) {
+
+				if (book != null) {
+
+					if (max < book.getQuantity()) {
+						max = book.getQuantity();
+						maxName = book.getTitle();
 					}
 				}
-				
+
 			}
 		}
-		 
-		System.out.println(maxName);
+
+		System.out.println("4) " + maxName);
 	}
-	
+
 	public void getFewestCopyIssuedBooks() {
-		
+
 		LibraryManagement libManagement = FileIO.getIssues(library01Issue, library02Issue, library03Issue);
 		Issue[][] issues = libManagement.getIssues();
-		
-		String[] libraries = {library01Books,library02Books,library03Books};
+
+		String[] libraries = { library01Books, library02Books, library03Books };
 		Library library = null;
-		
-		for(int i=0; i<issues.length; i++) {
-			
+		Book[] books;
+
+		String minName = null, minId = null;
+		int min = 100;
+
+		for (int i = 0; i < libraries.length; i++) {
+
+			library = FileIO.getBooks(libraries[i]);
+			books = library.getBook();
+
+			for (Book book : books) {
+
+				if (book != null) {
+
+					if (min > book.getQuantity()) {
+						min = book.getQuantity();
+						minId = book.getId();
+
+						for (int j = 0; j < issues.length; j++) {
+							for (int k = 0; k < issues[j].length; k++) {
+								if (issues[j][k] != null) {
+									if (issues[j][k].getBook().equals(minId)) {
+										minName = book.getTitle();
+									}
+								}
+							}
+						}
+					}
+				}
+
+			}
 		}
+		System.out.println("5) " + minName);
 	}
-	
+
 	public void getMemberLeastIssue() {
-		
-	}
 
+		LibraryManagement libManagement = FileIO.getIssues(library01Issue, library02Issue, library03Issue);
+		Issue[][] issues = libManagement.getIssues();
 
-	public static void main(String[] args) {
-		LibraryQuery query = new LibraryQuery();
-		query.getMaxIssuedBook();
-		query.getMemberMostIssue();
-		query.getHighPenalty();
-		query.getMostCopy();
+		Member[] members = FileIO.getMembers(membersCSV);
+
+		int minCount = 100;
+		String minName = null;
+
+		for (Member member : members) {
+			int count = 0;
+			for (int j = 0; j < issues[2].length; j++) {
+				if (issues[2][j] != null) {
+					if (issues[2][j].getMember().equals(member.getId())) {
+						count++;
+					}
+				}
+
+			}
+			if (minCount > count) {
+				minCount = count;
+				minName = member.getName();
+			}
+		}
+		System.out.println("6) " + minName);
+
 	}
 
 }
