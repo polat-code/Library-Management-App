@@ -4,6 +4,7 @@ public class LibraryManagement {
 	
 	private Issue[][] issues;
 	
+	/* Kanka 3 tane library var ama sen 1. dimension ın uzunluğunu 2 almışsın ? Nasıl 3 tanesini 2 taneye sığdırıyon ? */ 
 	public LibraryManagement() {
 	
 		this.issues = new Issue[2][50];
@@ -12,6 +13,7 @@ public class LibraryManagement {
 		
 		this.issues = issues;
 	}
+	/* oldLibraryManagement dan nasıl diren issues lara ulaşabiliyorsun ? private variable değil mi ?*/
 	public LibraryManagement(LibraryManagement oldLibraryManagement) {
 		
 		if(oldLibraryManagement == null) {
