@@ -11,7 +11,8 @@ public class LibraryQuery {
 	private String library03Issue = "src/data/L3_Issues.csv";
 
 	private String[] findIssuedBook(int libraryIndex, String dataPath) {
-
+		/* Niye her methodda dosyayı açıp kapatıyorsun extra işlem yaptırıyorsun programa ?*/
+		
 		LibraryManagement libManagement = FileIO.getIssues(library01Issue, library02Issue, library03Issue);
 		Library library = FileIO.getBooks(dataPath);
 
