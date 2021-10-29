@@ -27,6 +27,7 @@ public class Book {
 		
 	}
 	
+	/* Burdaki book 'un id veya herhangi bir özelliğine nasıl ulaşıyorsun?*/
 	public Book(Book oldBook) {
 		
 		if(oldBook == null) {
