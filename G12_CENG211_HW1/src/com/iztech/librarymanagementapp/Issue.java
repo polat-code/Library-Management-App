@@ -20,6 +20,7 @@ public class Issue {
 		this.returningDate = returningDate;
 	}
 	
+	/* oldIssue neden kuruldu ve onun id 'sine veya herhangi bir özelliğine nasıl ulaşıyorsun? Özellikler private tanınmlamışsın.*/
 	public Issue(Issue oldIssue) {
 		
 		if(oldIssue == null) {
