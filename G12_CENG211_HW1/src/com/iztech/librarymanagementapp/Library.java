@@ -2,6 +2,7 @@ package com.iztech.librarymanagementapp;
 
 public class Library {
 	
+	/* book arrayı birden fazla book içerdiği için book ismi yerine books koysan çok daha iyi olur bence.. */
 	private Book[] book;
 	
 	public Library() {
